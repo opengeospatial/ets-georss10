@@ -1,0 +1,7 @@
+org/opengis/cite/georss10/VerifyTestNGController.class
+org/opengis/cite/georss10/level1/VerifyCapability1Tests.class
+org/opengis/cite/georss10/VerifySuiteFixtureListener.class
+org/opengis/cite/georss10/VerifyETSAssert.class
+org/opengis/cite/georss10/util/VerifyURIUtils.class
+org/opengis/cite/georss10/util/VerifyXMLUtils.class
+org/opengis/cite/georss10/util/VerifyValidationUtils.class
