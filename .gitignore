@@ -1,1 +1,16 @@
 .DS_Store
+derby.log
+
+# Eclipse config
+.project
+.classpath
+.settings/
+
+# Maven output
+target/
+pom.xml.releaseBackup
+release.properties
+
+# IntelliJ IDEA
+.idea/
+*.iml
