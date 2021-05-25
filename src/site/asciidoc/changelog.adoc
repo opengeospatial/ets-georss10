@@ -2,6 +2,16 @@
 
 == ${project.version} (YYYY-MM-DD)
 
-The initial release implements the following test requirements:
+The initial release implements the following conformance classes:
 
-- all mandatory conformance classes (Class A, Class B)
+- Simple GeoRSS
+- GeoRSS Profile of GML 3.1.1
+
+The following requirements are implemented:
+
+* Clause 7.3    GeoRSS Simple Serialization
+* Clause 7.4    GeoRSS GML
+
+To do:
+
+* Clause 7.2    GeoRSS and Coordinate Reference Systems (CRS) 
