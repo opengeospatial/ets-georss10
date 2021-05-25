@@ -18,7 +18,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-
+import static org.testng.Assert.assertTrue;
 import org.apache.xerces.dom.DeferredElementNSImpl;
 import org.opengis.cite.georss10.DataFixture;
 import org.opengis.cite.georss10.ETSAssert;
@@ -53,13 +53,18 @@ public class Georss11GMLProfileValidationTests extends DataFixture {
 			
 			NodeList whereList = testSubject.getElementsByTagNameNS("http://www.georss.org/georss", "where");
 			int numWheres = whereList.getLength();
+			
+		
+			assertTrue((numWheres>0),  "There were no georss:where elements found in the document" );
+		
+			
 			for (int i = 0; i < numWheres; i++) {
 				
-				System.out.println("CHK A "+i+" "+whereList.item(i).getClass().toString());
+	
 			
 				if(whereList.item(i).getClass().equals(DeferredElementNSImpl.class))
 				{
-					System.out.println("CHK B "+i);
+	
 					
 					DeferredElementNSImpl whereElement = (DeferredElementNSImpl) whereList.item(i);
 					
@@ -67,11 +72,11 @@ public class Georss11GMLProfileValidationTests extends DataFixture {
 					for (String geometryType : geometryTypes) {					
 					 NodeList geomList = whereElement.getElementsByTagNameNS("http://www.opengis.net/gml", geometryType);
 					 
-					 System.out.println("CHK C "+i);
+			
 					 
 					 for(int j=0; j < geomList.getLength(); j++) {
 						Source source = new DOMSource(geomList.item(j));
-						System.out.println("Check where "+i+ " geom "+geometryType+" "+j);
+		
 						ETSAssert.assertSchemaValid(validator, source);
 					 }
 					 
@@ -83,15 +88,6 @@ public class Georss11GMLProfileValidationTests extends DataFixture {
 				
 			}			
 
-			/*String[] geometryTypes = { "point", "line", "polygon", "box", "elev", "floor", "radius" };
-			for (String geometryType : geometryTypes) {
-				NodeList geomList = testSubject.getElementsByTagNameNS("http://www.georss.org/georss", geometryType);
-				int numGeoms = geomList.getLength();
-				for (int i = 0; i < numGeoms; i++) {
-					Source source = new DOMSource(geomList.item(i));
-					ETSAssert.assertSchemaValid(validator, source);
-				}
-			}*/
 
 		} catch (Exception e) {
 			e.printStackTrace();
