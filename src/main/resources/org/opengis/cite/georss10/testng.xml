@@ -10,9 +10,14 @@
     <listener class-name="org.opengis.cite.georss10.TestFailureListener" />
   </listeners>
 
-  <test name="Conformance Level 1">
+  <test name="Simple">
     <classes>
-      <class name="org.opengis.cite.georss10.level1.Georss11ValidationTests" />
+      <class name="org.opengis.cite.georss10.simple.Georss11ValidationTests" />
     </classes>
   </test>
+  <test name="GeoRSSGML">
+    <classes>
+      <class name="org.opengis.cite.georss10.gmlprofile.Georss11GMLProfileValidationTests" />
+    </classes>
+  </test>  
 </suite>
