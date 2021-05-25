@@ -1,5 +1,7 @@
 package org.opengis.cite.georss10.simple;
 
+import static org.testng.Assert.assertTrue;
+
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URL;
@@ -53,16 +55,35 @@ public class Georss11ValidationTests extends DataFixture {
 			Schema schema = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(schemaUrl);
 			Validator validator = schema.newValidator();
 
+		
 			String[] geometryTypes = { "point", "line", "polygon", "box", "elev", "floor", "radius" };
 
+			
+			// check if there are any geometries
+			
+			boolean geometriesFound = false;
+			
+			for (String geometryType : geometryTypes) {
+				NodeList geomList = testSubject.getElementsByTagNameNS("http://www.georss.org/georss", geometryType);
+				int numGeoms = geomList.getLength();				
+				if(numGeoms>0) geometriesFound = true;			
+			}
+			
+			assertTrue(geometriesFound,  "There were no georss geometry elements found in the document" );	
+			
 			for (String geometryType : geometryTypes) {
 				NodeList geomList = testSubject.getElementsByTagNameNS("http://www.georss.org/georss", geometryType);
 				int numGeoms = geomList.getLength();
+				
+				assertTrue(numGeoms>0,  "There were no georss geometry elements found in the document" );
+				
 				for (int i = 0; i < numGeoms; i++) {
 					Source source = new DOMSource(geomList.item(i));
 					ETSAssert.assertSchemaValid(validator, source);
 				}
 			}
+			
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
