@@ -18,7 +18,8 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-
+import static org.testng.Assert.assertTrue;
+import org.apache.xerces.dom.DeferredElementNSImpl;
 import org.opengis.cite.georss10.DataFixture;
 import org.opengis.cite.georss10.ETSAssert;
 import org.opengis.cite.georss10.ErrorMessage;
@@ -45,21 +46,48 @@ public class Georss11GMLProfileValidationTests extends DataFixture {
 
 		try {
 
-			URL schemaUrl = this.getClass().getResource("/org/opengis/cite/georss10/xsd/opengis/georss/1.1/georss.xsd");
+			URL schemaUrl = this.getClass().getResource("/org/opengis/cite/georss10/xsd/opengis/gml/3.1.1/gml-3.1.1.xsd");
 
 			Schema schema = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(schemaUrl);
 			Validator validator = schema.newValidator();
-
-			String[] geometryTypes = { "point", "line", "polygon", "box", "elev", "floor", "radius" };
-
-			for (String geometryType : geometryTypes) {
-				NodeList geomList = testSubject.getElementsByTagNameNS("http://www.georss.org/georss", geometryType);
-				int numGeoms = geomList.getLength();
-				for (int i = 0; i < numGeoms; i++) {
-					Source source = new DOMSource(geomList.item(i));
-					ETSAssert.assertSchemaValid(validator, source);
+			
+			NodeList whereList = testSubject.getElementsByTagNameNS("http://www.georss.org/georss", "where");
+			int numWheres = whereList.getLength();
+			
+		
+			assertTrue((numWheres>0),  "There were no georss:where elements found in the document" );
+		
+			
+			for (int i = 0; i < numWheres; i++) {
+				
+	
+			
+				if(whereList.item(i).getClass().equals(DeferredElementNSImpl.class))
+				{
+	
+					
+					DeferredElementNSImpl whereElement = (DeferredElementNSImpl) whereList.item(i);
+					
+					String[] geometryTypes = { "Point", "LineString", "Polygon", "Envelope" };
+					for (String geometryType : geometryTypes) {					
+					 NodeList geomList = whereElement.getElementsByTagNameNS("http://www.opengis.net/gml", geometryType);
+					 
+			
+					 
+					 for(int j=0; j < geomList.getLength(); j++) {
+						Source source = new DOMSource(geomList.item(j));
+		
+						ETSAssert.assertSchemaValid(validator, source);
+					 }
+					 
+					}
+					
 				}
-			}
+				
+
+				
+			}			
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
