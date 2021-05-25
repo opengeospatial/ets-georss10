@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"org.opengis.cite.georss10"},{"l":"org.opengis.cite.georss10.level1"},{"l":"org.opengis.cite.georss10.util"}]
