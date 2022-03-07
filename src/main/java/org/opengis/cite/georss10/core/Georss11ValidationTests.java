@@ -123,10 +123,8 @@ public class Georss11ValidationTests extends DataFixture {
 		
 			}
 			else {
-				
-				if(geometriesFound==false) System.out.println("There were no georss geometry elements found in the document");
 			
-			assertTrue(geometriesFound,  "There were no georss geometry elements found in the document" );	
+			assertTrue(geometriesFound,  "There were no georss geometry elements nor where elements found in the document. Fails Clause 7.3 and Clause 7.4" );	
 			
 			}
 			
