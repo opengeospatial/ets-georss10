@@ -23,6 +23,7 @@ You can modify the sample file in `src/main/config/test-run-props.xml`
 <properties version="1.0">
   <comment>Test run arguments</comment>
   <entry key="iut">https://example.org/sample_georss.xml</entry>
+  <entry key="ics">Core</entry>
 </properties>
 ----
 
@@ -31,10 +32,7 @@ in `${user.home}/testng/` having a UUID value as its name.
 
 To build the project, run the following maven command.
 
-[source,sh]
-----
-mvn clean package -Dsource=8
-----
+`mvn clean package -Dsource=8`
 
 === 2. Command shell (console)
 
