@@ -1,13 +1,9 @@
 = Release Notes
 
-== 0.2 (YYYY-MM-DD)
+== 0.1 (2022-03-07)
 
-- https://github.com/opengeospatial/ets-georss10/issues/16[#16]: Update documentation for ETS v0.2
 - https://github.com/opengeospatial/ets-georss10/issues/12[#12]: Both conformance classes contain exactly the same tests and core conformance classes are not configured
 - https://github.com/opengeospatial/ets-georss10/issues/11[#11]: Integration tests are failing bug
-
-== 0.1 (2021-05-25)
-
 - https://github.com/opengeospatial/ets-georss10/issues/10[#10]: Update index.adoc
 - https://github.com/opengeospatial/ets-georss10/issues/9[#9]: Updated documentation
 - https://github.com/opengeospatial/ets-georss10/issues/8[#8]: 2021 05b
