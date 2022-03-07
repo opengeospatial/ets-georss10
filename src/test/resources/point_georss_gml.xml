@@ -21,7 +21,7 @@
  
       <georss:where>
          <gml:Point>
-            <gml:pos>45.256 -71.92</gml:pos>
+            <gml:pos1>45.256 -71.92</gml:pos1>
          </gml:Point>
       </georss:where>
    </entry>

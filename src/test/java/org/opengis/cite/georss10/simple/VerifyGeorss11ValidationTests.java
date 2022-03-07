@@ -6,7 +6,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.opengis.cite.georss10.simple.Georss11ValidationTests;
+import org.opengis.cite.georss10.core.Georss11ValidationTests;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

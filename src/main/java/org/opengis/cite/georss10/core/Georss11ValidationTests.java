@@ -1,4 +1,4 @@
-package org.opengis.cite.georss10.simple;
+package org.opengis.cite.georss10.core;
 
 import static org.testng.Assert.assertTrue;
 
@@ -20,7 +20,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-
+import org.apache.xerces.dom.DeferredElementNSImpl;
 import org.opengis.cite.georss10.DataFixture;
 import org.opengis.cite.georss10.ETSAssert;
 import org.opengis.cite.georss10.ErrorMessage;
@@ -35,18 +35,16 @@ import org.xml.sax.SAXException;
 public class Georss11ValidationTests extends DataFixture {
 
 	/**
-	 * Clause 5.1: Use version 1.1 of the GeoRSS schema. The 1.0 version of the
-	 * schema is still available for backwards compatibility. Clause 7.3: GeoRSS
-	 * Simple Serialization Test Method: Verify the test subject uses valid where or
-	 * geometry elements
+	 * Clause 5.1: Use version 1.1 of the GeoRSS schema. The 1.0 version of the schema is still available for backwards compatibility. 
+	 * Clause 7.3: GeoRSS Simple Serialization Test Method: Verify the test subject uses valid where or geometry elements
+	 * Clause 7.4: Encoding of GeoRSS in a GML Profile
 	 *
 	 * @throws SAXException If the resource cannot be parsed.
 	 * @throws IOException  If the resource is not accessible.
 	 */
-	@Test(description = "Implements Clause 5.1 and Clause 7.3 of OGC 17-002r1")
+	@Test(description = "Implements Clause 5.1 and Clause 7.3 and Clause 7.4 of OGC 17-002r1")
 	public void docHasValidSimpleGeoRSSElements() throws SAXException, IOException {
-		URL schemaRef = getClass().getResource("/org/opengis/cite/georss10/rnc/atom.rnc");
-		RelaxNGValidator rngValidator = new RelaxNGValidator(schemaRef);
+		
 
 		try {
 
@@ -68,19 +66,68 @@ public class Georss11ValidationTests extends DataFixture {
 				int numGeoms = geomList.getLength();				
 				if(numGeoms>0) geometriesFound = true;			
 			}
+						
+			if(geometriesFound) {   //Simple GeoRSS Conformance
+				for (String geometryType : geometryTypes) {
+					NodeList geomList = testSubject.getElementsByTagNameNS("http://www.georss.org/georss", geometryType);
+					int numGeoms = geomList.getLength();
+					for (int i = 0; i < numGeoms; i++) {
+		
+						Source source = new DOMSource(geomList.item(i));
+						ETSAssert.assertSchemaValid(validator, source);
+		
+					}
+	
+				}
+
+			}
+			else if(testSubject.getElementsByTagNameNS("http://www.georss.org/georss", "where").getLength()>0) {  // GeoRSS GML Conformance
+			
+				URL schemaUrl2 = this.getClass().getResource("/org/opengis/cite/georss10/xsd/opengis/gml/3.1.1/gml-3.1.1.xsd");
+
+				Schema schema2 = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(schemaUrl2);
+				Validator validator2 = schema2.newValidator();
+
+				NodeList whereList = testSubject.getElementsByTagNameNS("http://www.georss.org/georss", "where");
+				int numWheres = whereList.getLength();
+		
+				for (int i = 0; i < numWheres; i++) {
+
+		
+					if (whereList.item(i).getClass().equals(DeferredElementNSImpl.class)) {
+
+			
+						
+						DeferredElementNSImpl whereElement = (DeferredElementNSImpl) whereList.item(i);
+
+						String[] geometryTypes2 = { "Point", "LineString", "Polygon", "Envelope" };
+						for (String geometryType2 : geometryTypes2) {
+							NodeList geomList2 = whereElement.getElementsByTagNameNS("http://www.opengis.net/gml",
+									geometryType2);
+
+							for (int j = 0; j < geomList2.getLength(); j++) {
+								Source source2 = new DOMSource(geomList2.item(j));				
+								ETSAssert.assertSchemaValid(validator2, source2);
+						
+							}
+
+					
+						}
+						
+				
+
+					}
+			
+
+				}	
+		
+			}
+			else {
+				
+				if(geometriesFound==false) System.out.println("There were no georss geometry elements found in the document");
 			
 			assertTrue(geometriesFound,  "There were no georss geometry elements found in the document" );	
 			
-			for (String geometryType : geometryTypes) {
-				NodeList geomList = testSubject.getElementsByTagNameNS("http://www.georss.org/georss", geometryType);
-				int numGeoms = geomList.getLength();
-				
-				assertTrue(numGeoms>0,  "There were no georss geometry elements found in the document" );
-				
-				for (int i = 0; i < numGeoms; i++) {
-					Source source = new DOMSource(geomList.item(i));
-					ETSAssert.assertSchemaValid(validator, source);
-				}
 			}
 			
 			
