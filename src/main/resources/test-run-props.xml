@@ -3,5 +3,5 @@
 <properties version="1.0">
     <comment>Sample test run arguments</comment>
     <entry key="iut">https://raw.githubusercontent.com/opengeospatial/ets-georss10/master/src/test/resources/point_georss.xml</entry>
-    <entry key="ics">Simple,GeoRSSGML</entry>
+    <entry key="ics">Core</entry>
 </properties>
