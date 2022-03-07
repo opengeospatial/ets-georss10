@@ -1,17 +1,20 @@
 = Release Notes
 
-== ${project.version} (YYYY-MM-DD)
+== 0.2 (YYYY-MM-DD)
 
-The initial release implements the following conformance classes:
+- https://github.com/opengeospatial/ets-georss10/issues/16[#16]: Update documentation for ETS v0.2
+- https://github.com/opengeospatial/ets-georss10/issues/12[#12]: Both conformance classes contain exactly the same tests and core conformance classes are not configured
+- https://github.com/opengeospatial/ets-georss10/issues/11[#11]: Integration tests are failing bug
 
-- Simple GeoRSS
-- GeoRSS Profile of GML 3.1.1
+== 0.1 (2021-05-25)
 
-The following requirements are implemented:
-
-* Clause 7.3    GeoRSS Simple Serialization
-* Clause 7.4    GeoRSS GML
-
-To do:
-
-* Clause 7.2    GeoRSS and Coordinate Reference Systems (CRS) 
+- https://github.com/opengeospatial/ets-georss10/issues/10[#10]: Update index.adoc
+- https://github.com/opengeospatial/ets-georss10/issues/9[#9]: Updated documentation
+- https://github.com/opengeospatial/ets-georss10/issues/8[#8]: 2021 05b
+- https://github.com/opengeospatial/ets-georss10/issues/7[#7]: Implemented tests for Simple GeoRSS conformance
+- https://github.com/opengeospatial/ets-georss10/issues/6[#6]: Removed default location and class selection.
+- https://github.com/opengeospatial/ets-georss10/issues/5[#5]: Update Web Browser Interface
+- https://github.com/opengeospatial/ets-georss10/issues/4[#4]: Update documentation
+- https://github.com/opengeospatial/ets-georss10/issues/3[#3]: Added two new tests, required configuration and files.
+- https://github.com/opengeospatial/ets-georss10/issues/2[#2]: Create schema validation test for GeoRSS 1.0 and 1.1
+- https://github.com/opengeospatial/ets-georss10/issues/1[#1]: Create skeleton of TestNG based test suite with Maven archetype

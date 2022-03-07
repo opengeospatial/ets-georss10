@@ -3,10 +3,9 @@
 == Scope
 
 This executable test suite (ETS) verifies the conformance of the implementation
-under test (IUT) with respect to the set of OGC GeoRSS 1.0. Conformance testing is a kind of "black box" testing that examines the externally visible characteristics or behaviors of the IUT while disregarding
-any implementation details.
+under test (IUT) with respect to the set of OGC GeoRSS 1.0 standard. Conformance testing is a kind of "black box" testing that examines the externally visible characteristics or behaviors of the IUT while disregarding any implementation details.
 
-This release of the ETS implements the following conformance classes:
+This release of the ETS implements a single conformance class called *Core* that tests for conformance to:
 
 - Simple GeoRSS
 - GeoRSS Profile of GML 3.1.1
@@ -29,13 +28,13 @@ The general structure of the test suite is shown in Table 1.
 [cols="2,6a",options=header]
 |===
 |Conformance class
-|Test classes
+|Test classes and methods
 
 |Simple GeoRSS
-|org.opengis.cite.georss10.simple.*
+|org.opengis.cite.georss10.core.Georss11ValidationTests.docHasValidSimpleGeoRSSElements()
 
 |GeoRSS Profile of GML 3.1.1
-|org.opengis.cite.georss10.gmlprofile.*
+|org.opengis.cite.georss10.core.Georss11ValidationTests.docHasValidGMLGeoRSSElements()
 
 |===
 
@@ -61,10 +60,5 @@ The _Obligation_ descriptor can have the following values: M (mandatory), O (opt
 |URI
 |M
 |A URI that refers to the implementation under test or metadata about it. Ampersand ('&amp;') characters must be percent-encoded as '%26'.
-
-|ics
-|A comma-separated list of string values.
-|O
-|An implementation conformance statement that indicates which conformance classes or options are supported.
 
 |===
