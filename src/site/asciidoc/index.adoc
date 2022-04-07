@@ -7,8 +7,8 @@ under test (IUT) with respect to the set of OGC GeoRSS 1.0 standard. Conformance
 
 This release of the ETS implements a single conformance class called *Core* that tests for conformance to:
 
-- Simple GeoRSS
-- GeoRSS Profile of GML 3.1.1
+- Simple GeoRSS (See Clause 7.3 of OGC 17-002r1)
+- GeoRSS Profile of GML 3.1.1 (See Clause 7.4 of OGC 17-002r1)
 
 == Test requirements
 
@@ -25,16 +25,13 @@ of which includes a set of test classes that contain the actual test methods.
 The general structure of the test suite is shown in Table 1.
 
 .Test suite structure
-[cols="2,6a",options=header]
+[cols="4,6",options=header]
 |===
 |Conformance class
 |Test classes and methods
 
-|Simple GeoRSS
-|org.opengis.cite.georss10.core.Georss11ValidationTests.docHasValidSimpleGeoRSSElements()
-
-|GeoRSS Profile of GML 3.1.1
-|org.opengis.cite.georss10.core.Georss11ValidationTests.docHasValidGMLGeoRSSElements()
+|Core
+|org.opengis.cite.georss10.core.Georss11ValidationTests
 
 |===
 
@@ -59,6 +56,6 @@ The _Obligation_ descriptor can have the following values: M (mandatory), O (opt
 |iut
 |URI
 |M
-|A URI that refers to the implementation under test or metadata about it. Ampersand ('&amp;') characters must be percent-encoded as '%26'.
+|An Atom file conforming to the OGC GeoRSS Standard. 
 
 |===
